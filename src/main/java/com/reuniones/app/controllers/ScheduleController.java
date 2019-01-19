@@ -2,6 +2,7 @@ package com.reuniones.app.controllers;
 
 
 import com.reuniones.app.entities.Person;
+import com.reuniones.app.entities.WorkTime;
 import com.reuniones.app.services.SchedulesService;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("persons")
+@RequestMapping("schedule")
 public class ScheduleController {
 
 
@@ -30,13 +31,26 @@ public class ScheduleController {
     }
 
     @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    void addPerson(@RequestBody Person person) {
-        meetingService.addNew(person);
+    @ResponseBody
+    Person addOne(@RequestBody Person person) {
+        return meetingService.addNew(person);
     }
 
     @PostMapping(path = "/news", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
-    void newPersons(@RequestBody List<Person> personsList) {
-        meetingService.addSimultaneous(personsList);
+    void addMultiplies(@RequestBody List<Person> personsList) {
+        meetingService.addMultiplies(personsList);
+    }
+
+    @PostMapping(path = "/work", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    WorkTime setWorkHours(@RequestBody WorkTime workTime) {
+        return meetingService.setWorkTime(workTime);
+    }
+
+    @GetMapping(path = "/work", produces = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    WorkTime getworkHours() {
+        return meetingService.getWorkTime();
     }
 
 }
