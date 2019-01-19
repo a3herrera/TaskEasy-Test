@@ -10,7 +10,7 @@ import java.util.stream.Collectors;
 
 @Data
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class Person {
+public class People {
 
     private String name;
     private List<Time> schedules;
