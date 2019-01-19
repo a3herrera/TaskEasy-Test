@@ -5,6 +5,7 @@ import lombok.Data;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.stream.Collectors;
 
 
 @Data
@@ -14,4 +15,7 @@ public class Person {
     private String name;
     private List<Time> schedules;
 
+    public void setSchedules(List<Time> schedules) {
+        this.schedules = schedules.stream().distinct().sorted().collect(Collectors.toList());
+    }
 }
